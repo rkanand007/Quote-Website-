@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote of the day</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="quote-box">
+      <h2>Quote of the day</h2>
+      <blockquote id="quote">Loading...</blockquote>
+      <span id="author">Loading...</span>
+      <div>
+        <button onclick="getqoute(api_url)">New Quote</button>
+        <button onclick="watsapp()">
+          <img src="pngwing.com (11).png" alt="" />Share
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const quote = document.getElementById("quote");
+      const author = document.getElementById("author");
+      const api_url = "https://api.quotable.io/random";
+
+      async function getqoute(url) {
+        const response = await fetch(url);
+        var data = await response.json();
+        console.log(data);
+        quote.innerHTML = data.content;
+        author.innerHTML = data.author;
+      }
+      getqoute(api_url);
+
+      function watsapp() {
+        window.open(
+          "whatsapp://send?text=" +
+            quote.innerHTML +
+            " 𝑄𝑢𝑜𝑡𝑒 𝑏𝑦..." +
+            author.innerHTML,
+          "Watsapp Window",
+          +"width=600, height=300"
+        );
+      }
+    </script>
+  </body>
+</html>
